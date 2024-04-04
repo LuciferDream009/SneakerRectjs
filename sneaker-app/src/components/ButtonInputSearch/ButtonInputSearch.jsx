@@ -1,9 +1,10 @@
 import React from 'react';
-import { Input, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import InputComponent from '../InputComponent/InputComponent';
+import ButtonComponent from '../ButtonComponent/ButtonComponent';
 
 const ButtonInputSearch = (props) => {
-  const { size, placeholder, textButton } = props;
+  const { size, placeholder, textButton, bodered } = props;
 
   const customStyles = {
     display: 'flex',
@@ -20,10 +21,9 @@ const ButtonInputSearch = (props) => {
 
   return (
     <div style={customStyles}>
-      <Input size={size} placeholder={placeholder} />
-      <Button size={size} type="primary" icon={<SearchOutlined />} style={buttonStyles}>
-        {textButton}
-      </Button>
+      <InputComponent size={size} placeholder={placeholder} bodered={bodered}/>
+      <ButtonComponent size={size} type="primary" icon={<SearchOutlined />} style={buttonStyles}  textButton={textButton}/>
+       
     </div>
   );
 };

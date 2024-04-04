@@ -17,7 +17,7 @@ export const HeaderComponent = () => {
                     size='Default'
                     placeholder='Nhập từ khóa tìm kiếm' 
                     textButton='Tìm kiếm'   
-                    allowClear='true'           
+                    bordered={false}          
                     //  onSearch={onSearch}
                     />
                 </Col>
