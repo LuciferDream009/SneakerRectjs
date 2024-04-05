@@ -4,7 +4,6 @@ import { routes } from './routes';
 import DefaultComponent from './components/DefaultComponent/DefaultComponent';
 
 
-
 const App = () => {
   return (
     <div>

@@ -1,10 +1,10 @@
 import React from 'react'
 import {  Button } from 'antd';
-const ButtonComponent = ({size, textButton,style, ...rests}) => {
+const ButtonComponent = ({size, styleTextButton,styleButton,textButton, ...rests}) => {
     
   return (
-    <Button size={size} type="primary" style={style} {...rests}>
-    {textButton}
+    <Button size={size} style={styleButton} {...rests}>
+    <span style={styleTextButton}>{textButton}</span>
 
   </Button>
   )
