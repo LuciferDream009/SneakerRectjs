@@ -20,7 +20,8 @@ function HomePage() {
           })}
         </WrapperTypeProduct>
       </div>
-      <div id='container' style={{ backgroundColor: '#efefef', padding: '0 120px', height:'1000px'}}>
+     <div className="body"  style={{ backgroundColor: '#efefef', width: '100%'}}>
+     <div id='container' style={{ height:'1000px', margin:'0 auto', width:'1270px' }}>
         <SliderComponent arrImages={[Slider1, Slider2, Slider3]} />
         <WrapperProducts> 
           <CartComponent />
@@ -43,6 +44,7 @@ function HomePage() {
           styleTextButton={{fontWeight: 500}}/>
          </div>
       </div>
+     </div>
 
     </>
 

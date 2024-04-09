@@ -7,12 +7,12 @@ export const HeaderComponent = () => {
     return (
         <div>
             <WrapperHeader gutter={16}>
-                <Col span={6}>
+                <Col span={5}>
                     <WrapperHeaderText>
                         BANGIAYNOSKILL
                     </WrapperHeaderText>
                 </Col>
-                <Col span={12}>
+                <Col span={13}>
                     <ButtonInputSearch
                         size='Default'
                         placeholder='Nhập từ khóa tìm kiếm'
