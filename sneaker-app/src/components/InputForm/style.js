@@ -5,7 +5,5 @@ export const WrapperStyleInput = styled(Input)`
     border-right: none;
     border-left: none;
     outline: none;
-    &:focus {
-        background-color: rgba(232, 240, 254);
-    }
+    
 `
