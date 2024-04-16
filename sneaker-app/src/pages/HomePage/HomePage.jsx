@@ -7,8 +7,16 @@ import Slider2 from '../../assets/images/Slider2.png'
 import Slider3 from '../../assets/images/Slider3.png'
 import CartComponent from '../../components/CartComponent/CartComponent'
 //import NavbarComponent from '../../components/NavbarComponent/NavbarComponent'
-function HomePage() {
+import { useQuery } from '@tanstack/react-query'
+import *  as ProductService from '../../service/ProductService'
+const  HomePage = () => {
   const arr = ['NIKE', 'JORDAN', 'ADIDAS', 'YEZZY']
+  const fetchAllProduct =  async () => {
+    const res = await ProductService.getAllproduct()
+    return res
+  }
+  const { data: products } = useQuery({ queryKey: ['products'], queryFn: fetchAllProduct });
+
   return (
     <>
       <div style={{ padding: '0 120px' }}>
@@ -24,16 +32,22 @@ function HomePage() {
      <div id='container' style={{ height:'1000px', margin:'0 auto', width:'1270px' }}>
         <SliderComponent arrImages={[Slider1, Slider2, Slider3]} />
         <WrapperProducts> 
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
-          <CartComponent />
+        {products?.data?.map((product) => {
+              return (
+                <CartComponent
+                  key={product._id}
+                  countInStock={product.countInStock}
+                  description={product.description}
+                  image={product.image}
+                  name={product.name}
+                  price={product.price}
+                  rating={product.rating}
+                  type={product.type}
+                  id={product._id}
+                />
+              )
+            })}
+         
         </WrapperProducts>
          <div style={{display: 'flex',width:'100%', justifyContent:"center",marginTop:"10px"}}>
          <WrapperButtonMore textButton='Xem them' type='outline' styleButton={{

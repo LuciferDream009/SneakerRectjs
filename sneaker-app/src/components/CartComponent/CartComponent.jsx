@@ -1,28 +1,36 @@
 import React from 'react'
 import { StyleNameProduct, WrapperCardStyle, WrapperDiscountText, WrapperPriceText, WrapperReportText, WrapperStyleTextSell } from './style'
 import { StarFilled } from '@ant-design/icons'
-
-const CartComponent = () => {
+import { convertPrice } from '../../until'
+import { useNavigate } from 'react-router-dom'
+const CartComponent = (props) => {
+    const { countInStock, description, image, name, price, rating, type, discount, selled, id } = props
+    const navigate = useNavigate()
+    const handleDetailsProduct = (id) => {
+        console.log(id);
+        navigate(`/productDetails/${id}`)
+    }
     return (
         <WrapperCardStyle
             hoverable
             headStyle={{width: '200px', height: '200px'}}
             style={{ width: 200 }}
             bodyStyle={{ padding: '10px' }}
-            cover={<img alt="example" src="https://kingshoes.vn/data/upload/media/fz3593-133-giay-nike-air-max-excee-gia-tot-den-king-shoes-12.jpeg" />}
+            cover={<img alt="example" src={image} />}
+            onClick={() =>  handleDetailsProduct(id)}
         >
             <img src="https://salt.tikicdn.com/ts/tka/69/cf/22/1be823299ae34c7ddcd922e73abd4909.png" alt='Discount badge' style={{ width:'68px', height:'14px',position:'absolute', top:-1, left:-1}} />
-            <StyleNameProduct>Product 1</StyleNameProduct>
+            <StyleNameProduct>{name}</StyleNameProduct>
             <WrapperReportText>
                 <span style={{marginRight: '4px'}}>
-                    <span>4.95</span> <StarFilled style={{ fontSize: '12px', color: 'yellow' }} />
+                    <span>{rating}</span> <StarFilled style={{ fontSize: '12px', color: 'yellow' }} />
                 </span>
-                <WrapperStyleTextSell> | Đã bán 100+</WrapperStyleTextSell>
+                <WrapperStyleTextSell> | Đã bán {selled || 1000}</WrapperStyleTextSell>
             </WrapperReportText>
             <WrapperPriceText>
-                <span style={{marginRight:'8px'}}> 1.000.0000 vnd</span>
+                <span style={{marginRight:'8px'}}> {convertPrice(price)}</span>
                 <WrapperDiscountText>
-                    -5%
+                    - {discount || 5} %
                 </WrapperDiscountText>
                 </WrapperPriceText>
         </WrapperCardStyle>

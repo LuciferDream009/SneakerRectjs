@@ -3,36 +3,51 @@ import { Col, Row, Image, Radio } from 'antd'
 import { WrapperTextSizeProduct, WrapperPriceProduct, WrapperStyleColImage, WrapperStyleImageSmall, WrapperStyleNameProduct, WrapperStyleTextSell, WrapperTextProduct, WrapperQualityProduct, WrapperInputNumber } from './style'
 import { StarFilled, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
-const ProductDetailComponent = () => {
+import * as ProductService from '../../service/ProductService'
+import { useQuery } from '@tanstack/react-query'
+import { convertPrice } from '../../until'
+const ProductDetailComponent = ({idProduct}) => {
+    console.log("idpr", idProduct);
+    const fetchGetDetailsProduct = async ({ id }) => {
+        const res = await ProductService.getDetailsProduct(id);
+        if (res) {
+          return res.data;
+        }
+      }
+    const { data: productDetails } = useQuery({
+        queryKey: ['productDetails', idProduct],
+        queryFn: () => fetchGetDetailsProduct({id: idProduct}),
+        enabled: !!idProduct
+      });
     const onChange = () => { };
     return (
         <Row style={{ padding: '16px', background: '#fff' }}>
             <Col span={10} style={{borderRight:'1px solid #e5e5e5', paddingRight:'10px'}}>
-                <Image src='https://myshoes.vn/image/cache/catalog/2024/nike/nk3/giay-nike-interact-run-nam-den-trang-01-800x800.jpg' alt='img product' preview={false} />
+                <Image src={productDetails?.image} alt='img product' preview={false} />
                 <Row style={{ paddingTop: '10px', justifyContent: 'space-between' }}>
                     <WrapperStyleColImage span={4}>
-                        <WrapperStyleImageSmall src='https://myshoes.vn/image/cache/catalog/2024/nike/nk3/giay-nike-interact-run-nam-den-trang-07-800x800.jpg' alt='img product small' preview={false} />
+                        <WrapperStyleImageSmall src={productDetails?.image} alt='img product small' preview={false} />
                     </WrapperStyleColImage>
                     <WrapperStyleColImage span={4}>
-                        <WrapperStyleImageSmall src='https://myshoes.vn/image/cache/catalog/2024/nike/nk3/giay-nike-interact-run-nam-den-trang-07-800x800.jpg' alt='img product small' preview={false} />
+                        <WrapperStyleImageSmall src={productDetails?.image} alt='img product small' preview={false} />
                     </WrapperStyleColImage>
                     <WrapperStyleColImage span={4}>
-                        <WrapperStyleImageSmall src='https://myshoes.vn/image/cache/catalog/2024/nike/nk3/giay-nike-interact-run-nam-den-trang-07-800x800.jpg' alt='img product small' preview={false} />
+                        <WrapperStyleImageSmall src={productDetails?.image} alt='img product small' preview={false} />
                     </WrapperStyleColImage>
                     <WrapperStyleColImage span={4}>
-                        <WrapperStyleImageSmall src='https://myshoes.vn/image/cache/catalog/2024/nike/nk3/giay-nike-interact-run-nam-den-trang-07-800x800.jpg' alt='img product small' preview={false} />
+                        <WrapperStyleImageSmall src={productDetails?.image} alt='img product small' preview={false} />
                     </WrapperStyleColImage>
                     <WrapperStyleColImage span={4}>
-                        <WrapperStyleImageSmall src='https://myshoes.vn/image/cache/catalog/2024/nike/nk3/giay-nike-interact-run-nam-den-trang-07-800x800.jpg' alt='img product small' preview={false} />
+                        <WrapperStyleImageSmall src={productDetails?.image} alt='img product small' preview={false} />
                     </WrapperStyleColImage>
                     <WrapperStyleColImage span={4}>
-                        <WrapperStyleImageSmall src='https://myshoes.vn/image/cache/catalog/2024/nike/nk3/giay-nike-interact-run-nam-den-trang-07-800x800.jpg' alt='img product small' preview={false} />
+                        <WrapperStyleImageSmall src={productDetails?.image} alt='img product small' preview={false} />
                     </WrapperStyleColImage>
 
                 </Row>
             </Col>
             <Col span={14} style={{paddingLeft: '10px'}}>
-                <WrapperStyleNameProduct>GIÀY NIKE INTERACT RUN NAM - XANH TRẮNG</WrapperStyleNameProduct>
+                <WrapperStyleNameProduct>{productDetails?.name}</WrapperStyleNameProduct>
                 <div>
                     <StarFilled style={{ fontSize: '12px', color: 'rgb(253, 216, 54)' }} />
                     <StarFilled style={{ fontSize: '12px', color: 'rgb(253, 216, 54)' }} />
@@ -41,7 +56,7 @@ const ProductDetailComponent = () => {
                 </div>
                 <WrapperPriceProduct>
                     <WrapperTextProduct>
-                        2.090.000₫
+                    {convertPrice(productDetails?.price)}
                     </WrapperTextProduct>
                 </WrapperPriceProduct>
                 <WrapperTextSizeProduct>
